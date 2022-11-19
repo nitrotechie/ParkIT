@@ -1,6 +1,4 @@
-// ignore_for_file: unnecessary_new
 
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:parkit/services/services.dart';
@@ -20,7 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController phno = TextEditingController();
   final TextEditingController otp = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final _formKeyOTP = GlobalKey<FormState>();
   var changeButton = false;
 
   @override
@@ -29,117 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     phno.text = Data.phno == "" ? phno.text : Data.phno;
   }
 
-  showOTPDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              top: 30,
-              bottom: 30,
-              left: 30,
-              right: 30,
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Form(
-                    key: _formKeyOTP,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/images/otp.gif',
-                          height: 300,
-                          width: 300,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Material(
-                          type: MaterialType.transparency,
-                          child: Text(
-                            "OTP",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Material(
-                          type: MaterialType.transparency,
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            maxLength: 6,
-                            controller: otp,
-                            decoration: const InputDecoration(
-                              hintText: "Enter Your OTP",
-                            ),
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please Enter Your OTP";
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Center(
-                          child: Container(
-                            width: changeButton == true
-                                ? 40
-                                : MediaQuery.of(context).size.width - 40,
-                            decoration: BoxDecoration(
-                              color: MyTheme.ligthBluishColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: TextButton(
-                              child: changeButton == true
-                                  ? const CircularProgressIndicator()
-                                  : const Text(
-                                      "Continue",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                              onPressed: () {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                                if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    changeButton == true;
-                                  });
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
-        });
-  }
+  
 
   @override
   Widget build(BuildContext context) {

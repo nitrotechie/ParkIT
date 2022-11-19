@@ -171,6 +171,22 @@ class _OTPScreenState extends State<OTPScreen> {
                                 ),
                               ),
                             ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  "Resend OTP",
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
