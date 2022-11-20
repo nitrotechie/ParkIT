@@ -35,46 +35,47 @@ class _OTPScreenState extends State<OTPScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.indigo.withOpacity(0.1),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Verification",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.indigo.withOpacity(0.1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Verification",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                "In less than a minute",
-                                style: TextStyle(
-                                  color: Colors.grey.shade400,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
+                            ),
+                            Text(
+                              "In less than a minute",
+                              style: TextStyle(
+                                color: Colors.grey.shade400,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Image.asset(
-                          'assets/images/ver.png',
-                          gaplessPlayback: false,
-                          height: 200,
-                          width: 200,
-                        ),
-                      ],
-                    )),
+                      ),
+                      Image.asset(
+                        'assets/images/ver.png',
+                        gaplessPlayback: false,
+                        height: 200,
+                        width: 200,
+                      ),
+                    ],
+                  ),
+                ),
                 Flexible(
                   fit: FlexFit.loose,
                   child: Padding(

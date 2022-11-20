@@ -39,6 +39,7 @@ Future logOut(BuildContext context) async {
 
 class Data {
   static var image;
-  static var userName;
+  static var userName = "Anon";
   static var phno = "";
+  static var balance = "0";
 }

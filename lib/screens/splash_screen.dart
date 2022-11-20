@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:parkit/screens/bottom_navigation_bar.dart';
 import 'package:parkit/screens/home_screen.dart';
 import 'package:parkit/screens/login_Screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,9 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Timer(const Duration(seconds: 4), () {
-    //   checkFirstSeen();
-    // });
+    Timer(const Duration(seconds: 4), () {
+      checkFirstSeen();
+    });
   }
 
   Future checkFirstSeen() async {
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (_seen) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+          MaterialPageRoute(builder: (context) => BottomNavigationBarScreen()));
     } else {
       prefs.setBool('seen', true);
       Navigator.of(context).pushReplacement(

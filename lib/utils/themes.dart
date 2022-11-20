@@ -29,7 +29,7 @@ class MyTheme with ChangeNotifier {
         primarySwatch: Colors.indigo,
         fontFamily: GoogleFonts.poppins().fontFamily,
         cardColor: Colors.white,
-        canvasColor: Colors.indigo[100],
+        canvasColor: Colors.indigo[50],
         buttonTheme: ButtonThemeData(
           buttonColor: darkBluishColor,
         ),

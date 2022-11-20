@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
             themeMode: theme.isDark == true ? ThemeMode.dark : ThemeMode.light,
             theme: MyTheme.lightTheme(context),
             darkTheme: MyTheme.darkTheme(context),
-            home: LoginScreen(),
+            home: const SplashScreen(),
           );
         },
       ),
