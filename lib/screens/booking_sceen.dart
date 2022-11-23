@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:parkit/utils/themes.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -22,6 +19,7 @@ class _BookingScreenState extends State<BookingScreen> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
+            fontSize: 20,
           ),
         ),
       ),

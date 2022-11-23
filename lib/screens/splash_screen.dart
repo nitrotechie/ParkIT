@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:parkit/screens/bottom_navigation_bar.dart';
-import 'package:parkit/screens/home_screen.dart';
 import 'package:parkit/screens/login_Screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +10,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -20,21 +20,22 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 4), () {
-      checkFirstSeen();
+      checkLogin();
     });
   }
 
-  Future checkFirstSeen() async {
+  Future checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = (prefs.getBool('seen') ?? false);
+    bool? login = prefs.getBool('login');
 
-    if (_seen) {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => BottomNavigationBarScreen()));
+    if (login == true) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const BottomNavigationBarScreen()));
     } else {
-      prefs.setBool('seen', true);
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginScreen()));
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -52,9 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Image.asset(
             'assets/images/logo.gif',
           ),
-          Image.asset(
-            'assets/images/sp.png',
-          ),
+          LottieBuilder.asset("assets/animation/park.json"),
         ],
       ),
     ));

@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:parkit/screens/login_screen.dart';
-import 'package:parkit/screens/register_screen.dart';
 import 'package:parkit/screens/splash_screen.dart';
 import 'package:parkit/utils/themes.dart';
 import 'package:provider/provider.dart';
