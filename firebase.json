@@ -17,7 +17,5 @@
       }
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
-  }
+  "build": ""
 }
