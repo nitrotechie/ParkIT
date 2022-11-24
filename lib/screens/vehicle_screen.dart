@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:parkit/screens/add_vehicle.dart';
 import 'package:parkit/services/services.dart';
 import 'package:parkit/utils/themes.dart';
@@ -66,12 +67,11 @@ class _VehicleScreenState extends State<VehicleScreen> {
                           ],
                         ),
                       ),
-                      Image.asset(
-                        'assets/images/vehicles.png',
-                        gaplessPlayback: false,
+                      LottieBuilder.asset(
+                        "assets/animation/car.json",
                         height: 200,
                         width: 200,
-                      ),
+                      )
                     ],
                   ),
                 ),

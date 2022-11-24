@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:parkit/firebase_options.dart';
 import 'package:parkit/screens/login_screen.dart';
 import 'package:parkit/screens/splash_screen.dart';
 import 'package:parkit/utils/themes.dart';
@@ -10,11 +12,16 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  ByteData data =
-      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext
-      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  if (Platform.isAndroid) {
+    ByteData data =
+        await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+    SecurityContext.defaultContext
+        .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  }
   runApp(const MyApp());
 }
 

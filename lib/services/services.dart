@@ -104,7 +104,7 @@ class Data {
   static double lat = 0.0;
   static double lon = 0.0;
 
-  static void getCurrentPosition(BuildContext context) async {
+  static Future getCurrentPosition(BuildContext context) async {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied ||

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>265486938993-irl297uc4jm37383hebnnm7n70nskk28.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.265486938993-irl297uc4jm37383hebnnm7n70nskk28</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>265486938993-a19u75m9mku1quv0obh52r7n45t53b23.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAPgKXka6MGOvP0o7gmbjyZq0Cq8QAvgtg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>265486938993</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.nitrotechie.parkit</string>
+	<key>PROJECT_ID</key>
+	<string>parkit-acc63</string>
+	<key>STORAGE_BUCKET</key>
+	<string>parkit-acc63.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:265486938993:ios:8d64610ac6544e95ae7cd0</string>
+</dict>
+</plist>

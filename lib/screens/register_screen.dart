@@ -194,6 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         maxLength: 10,
                                         controller: phno,
                                         decoration: const InputDecoration(
+                                          counterText: "",
                                           hintText: "Enter Your Phone Number",
                                         ),
                                         validator: (value) {

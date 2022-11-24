@@ -94,7 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 10,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Text(
@@ -112,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       maxLength: 10,
                                       controller: phno,
                                       decoration: const InputDecoration(
+                                        counterText: "",
                                         hintText: "Enter Your Phone Number",
                                       ),
                                       validator: (value) {
