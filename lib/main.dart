@@ -16,12 +16,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (Platform.isAndroid) {
-    ByteData data =
-        await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-    SecurityContext.defaultContext
-        .setTrustedCertificatesBytes(data.buffer.asUint8List());
-  }
+  // if (Platform.isAndroid) {
+  //   ByteData data =
+  //       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  //   SecurityContext.defaultContext
+  //       .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  // }
   runApp(const MyApp());
 }
 
