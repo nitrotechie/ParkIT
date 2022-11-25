@@ -20,7 +20,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.17.6 <3.0.0"
 
-
 module:
   androidX: true
 
@@ -45,6 +44,7 @@ dependencies:
   geolocator: ^9.0.2
   google_fonts: null
   google_maps_flutter: ^2.2.1
+  google_maps_flutter_web: ^0.4.0+3
   google_sign_in: ^5.2.4
   http: null
   intl: null

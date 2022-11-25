@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:parkit/firebase_options.dart';
@@ -16,12 +17,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // if (Platform.isAndroid) {
-  //   ByteData data =
-  //       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  //   SecurityContext.defaultContext
-  //       .setTrustedCertificatesBytes(data.buffer.asUint8List());
-  // }
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    ByteData data =
+        await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+    SecurityContext.defaultContext
+        .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  }
   runApp(const MyApp());
 }
 
