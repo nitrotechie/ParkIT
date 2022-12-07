@@ -32,12 +32,14 @@ module:
 dependencies:
   animated_text_kit: ^4.2.1
   cached_network_image: ^3.2.0
-  cloud_firestore: ^3.1.10
+  cloud_firestore: ^4.1.0
   cupertino_icons: ^1.0.2
   dio: ^4.0.4
-  firebase_auth: ^3.3.9
-  firebase_core: ^1.13.1
-  firebase_core_platform_interface: 4.5.1
+  easy_upi_payment: ^0.1.2
+  firebase_auth: ^4.1.5
+  firebase_core: ^2.3.0
+  firebase_core_platform_interface: 4.5.2
+  firebase_dynamic_links: ^5.0.7
   firebase_storage: null
   flutter:
     sdk: flutter
@@ -47,9 +49,10 @@ dependencies:
   google_maps_flutter_web: ^0.4.0+3
   google_sign_in: ^5.2.4
   http: null
-  intl: null
+  intl: ^0.17.0
   lottie: ^2.0.0
   path_provider: ^2.0.2
+  paytm_allinonesdk: ^1.2.0
   permission_handler: ^10.2.0
   pinput: ^2.2.16
   provider: ^6.0.2

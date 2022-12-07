@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:parkit/screens/add_vehicle.dart';
@@ -13,6 +15,125 @@ class VehicleScreen extends StatefulWidget {
 }
 
 class _VehicleScreenState extends State<VehicleScreen> {
+  TextEditingController rcNo = TextEditingController();
+  bool changeButton = false;
+  showAddVehicle() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              padding: const EdgeInsets.all(
+                20,
+              ),
+              margin: const EdgeInsets.all(20),
+              height: MediaQuery.of(context).size.height / 4,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Enter your Vehicle Number",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      onTap: () {},
+                      textAlign: TextAlign.center,
+                      controller: rcNo,
+                      decoration: InputDecoration(
+                        hintText: 'GJ 0X HX XX07',
+                        filled: true,
+                        fillColor: Colors.indigo[100],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.lightbulb_sharp,
+                          color: Colors.yellow,
+                          size: 10,
+                        ),
+                        Text(
+                          "We will fetch all your vehicle details for you. Just add your vehicle in 1 click.",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 40,
+                      decoration: BoxDecoration(
+                        color: MyTheme.ligthBluishColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextButton(
+                        child: const Text(
+                          "ADD VEHICLE",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                        onPressed: () async {
+                          var msg1 =
+                              "This vehicle is already added in vehicle master list.";
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          changeButton = true;
+                          setState(() {});
+                          await addNewVehicle(rcNo.text)
+                              ? showSnackBar1(msg1)
+                              : print("Proceed");
+                          changeButton = false;
+                          setState(() {});
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  showSnackBar1(msg) {
+    final snackBar1 = Widgets.showSnackBar(msg);
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,159 +148,157 @@ class _VehicleScreenState extends State<VehicleScreen> {
           },
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.indigo.withOpacity(0.1),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "My Vehicle",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "Vehicles you own",
-                              style: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      LottieBuilder.asset(
-                        "assets/animation/car.json",
-                        height: 200,
-                        width: 200,
-                      )
-                    ],
-                  ),
-                ),
-                Stack(
+      body: Stack(
+        children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                color: Colors.white,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    GestureDetector(
-                      onTap: (() {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const AddVehicleScreen()));
-                      }),
-                      child: Container(
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
                         color: Colors.indigo.withOpacity(0.1),
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                            left: 20,
-                            right: 20,
-                            bottom: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            color: MyTheme.ligthBluishColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                            ),
-                          ),
-                          child: Card(
-                            color: Colors.transparent,
-                            elevation: 0,
-                            child: Row(
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(
-                                  Icons.add,
-                                  color: Colors.white,
+                                const Text(
+                                  "My Vehicle",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: const [
-                                        Text(
-                                          "Add New Vehicle",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                Text(
+                                  "Vehicles you own",
+                                  style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
+                          LottieBuilder.asset(
+                            "assets/animation/car.json",
+                            height: 200,
+                            width: 200,
+                          )
+                        ],
                       ),
                     ),
-                    Positioned(
-                      top: 90,
-                      child: Container(
-                        height: 30,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                    Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: (() {
+                            showAddVehicle();
+                            // Navigator.of(context).push(MaterialPageRoute(
+                            //     builder: (context) => const AddVehicleScreen()));
+                          }),
+                          child: Container(
+                            color: Colors.indigo.withOpacity(0.1),
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                                left: 20,
+                                right: 20,
+                                bottom: 20,
+                              ),
+                              decoration: BoxDecoration(
+                                color: MyTheme.ligthBluishColor,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: Card(
+                                color: Colors.transparent,
+                                elevation: 0,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: const [
+                                            Text(
+                                              "Add New Vehicle",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          top: 90,
+                          child: Container(
+                            height: 30,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Widgets.vehicleCard(
+                      "title",
+                      "subTitle",
+                      Data.hatchback,
                     ),
                   ],
                 ),
-                Widgets.vehicleCard(
-                  "title",
-                  "subTitle",
-                  Data.hatchback,
-                ),
-                Widgets.vehicleCard(
-                  "title",
-                  "subTitle",
-                  Data.sedan,
-                ),
-                Widgets.vehicleCard(
-                  "title",
-                  "subTitle",
-                  Data.suv,
-                ),
-                Widgets.vehicleCard(
-                  "title",
-                  "subTitle",
-                  Data.pickup,
-                ),
-                Widgets.vehicleCard(
-                  "title",
-                  "subTitle",
-                  Data.coupe,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+          changeButton == true
+              ? BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Center(
+                    child: LottieBuilder.asset(
+                      "assets/animation/car-loader.json",
+                      height: 100,
+                      width: 100,
+                    ),
+                  ),
+                )
+              : Container(),
+        ],
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:parkit/screens/register_screen.dart';
+import 'package:parkit/services/private_services.dart';
 import 'package:parkit/services/services.dart';
 import 'package:parkit/utils/themes.dart';
 import 'package:parkit/widgets/otp.dart';
@@ -19,6 +20,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController otp = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var changeButton = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    logInEmail();
+  }
 
   @override
   Widget build(BuildContext context) {

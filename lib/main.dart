@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:parkit/firebase_options.dart';
-import 'package:parkit/screens/login_screen.dart';
+import 'package:parkit/screens/add_money.dart';
 import 'package:parkit/screens/splash_screen.dart';
+import 'package:parkit/services/services.dart';
 import 'package:parkit/utils/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +23,7 @@ void main() async {
     SecurityContext.defaultContext
         .setTrustedCertificatesBytes(data.buffer.asUint8List());
   }
+
   runApp(const MyApp());
 }
 
@@ -35,6 +36,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   MyTheme theme = MyTheme();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initDynamicLinks();
+  }
+
+  initDynamicLinks() async {
+    FirebaseDynamicLinks.instance.onLink.listen((dynamicLink) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => const AddMoneyScreen()));
+    }).onError((e) {});
+  }
 
   @override
   Widget build(BuildContext context) {

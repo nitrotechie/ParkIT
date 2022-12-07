@@ -30,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (login == true) {
       // ignore: use_build_context_synchronously
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const BottomNavigationBarScreen()));
     } else {

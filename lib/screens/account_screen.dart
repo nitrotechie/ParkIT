@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:parkit/screens/add_money.dart';
 import 'package:parkit/screens/address_screen.dart';
 import 'package:parkit/screens/faq_screen.dart';
 import 'package:parkit/screens/privacy_policy_screen.dart';
@@ -119,7 +120,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 Stack(
                   children: [
                     GestureDetector(
-                      onTap: (() {}),
+                      onTap: (() {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const AddMoneyScreen()));
+                      }),
                       child: Container(
                         color: Colors.indigo.withOpacity(0.1),
                         child: Container(
