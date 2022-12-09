@@ -1,14 +1,17 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:parkit/screens/add_vehicle.dart';
 import 'package:parkit/services/services.dart';
 import 'package:parkit/utils/themes.dart';
 import 'package:parkit/widgets/widgets.dart';
 
 class VehicleScreen extends StatefulWidget {
-  VehicleScreen({Key? key}) : super(key: key);
+  VehicleScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<VehicleScreen> createState() => _VehicleScreenState();
@@ -16,6 +19,8 @@ class VehicleScreen extends StatefulWidget {
 
 class _VehicleScreenState extends State<VehicleScreen> {
   TextEditingController rcNo = TextEditingController();
+  final firebase = FirebaseFirestore.instance;
+  User? user = FirebaseAuth.instance.currentUser;
   bool changeButton = false;
   showAddVehicle() {
     showModalBottomSheet(
@@ -109,12 +114,16 @@ class _VehicleScreenState extends State<VehicleScreen> {
                         onPressed: () async {
                           var msg1 =
                               "This vehicle is already added in vehicle master list.";
+                          var msg2 = "Please Enter a valid Vehicle Number.";
                           FocusScope.of(context).requestFocus(FocusNode());
                           changeButton = true;
                           setState(() {});
-                          await addNewVehicle(rcNo.text)
+                          Navigator.of(context).pop();
+                          await addNewVehicle(rcNo.text.toUpperCase())
                               ? showSnackBar1(msg1)
-                              : print("Proceed");
+                              : await getVehicleDetails(rcNo.text.toUpperCase())
+                                  ? null
+                                  : showSnackBar1(msg2);
                           changeButton = false;
                           setState(() {});
                         },
@@ -130,7 +139,6 @@ class _VehicleScreenState extends State<VehicleScreen> {
 
   showSnackBar1(msg) {
     final snackBar1 = Widgets.showSnackBar(msg);
-    Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(snackBar1);
   }
 
@@ -276,11 +284,47 @@ class _VehicleScreenState extends State<VehicleScreen> {
                         ),
                       ],
                     ),
-                    Widgets.vehicleCard(
-                      "title",
-                      "subTitle",
-                      Data.hatchback,
-                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        10,
+                        20,
+                        20,
+                        20,
+                      ),
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: firebase
+                            .collection('users')
+                            .doc(user!.phoneNumber
+                                .toString()
+                                .replaceAll('+91', ''))
+                            .collection('vehicles')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          return snapshot.hasData
+                              ? ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const ScrollPhysics(),
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, i) {
+                                    QueryDocumentSnapshot x =
+                                        snapshot.data!.docs[i];
+                                    return x['registration_number'] == 'null'
+                                        ? Container(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 200),
+                                            child: LottieBuilder.asset(
+                                                "assets/animation/nodata.json"),
+                                          )
+                                        : Widgets.vehicleCard(
+                                            x['manufacturer_model'],
+                                            x['manufacturer'],
+                                            x['vehicle_type']);
+                                  },
+                                )
+                              : Container();
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),

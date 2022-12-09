@@ -261,6 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               String priceBike = x['priceBike'];
                                               String priceCar = x['priceCar'];
                                               String projectId = x['projectId'];
+                                              String type = x['type'];
                                               String distance =
                                                   (Geolocator.distanceBetween(
                                                             lati,
@@ -284,6 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             ParkingSpotScreen(
                                                           projectId: projectId,
                                                           distance: distance,
+                                                          type: type,
                                                         ),
                                                       ),
                                                     );

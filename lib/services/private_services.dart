@@ -22,4 +22,27 @@ Future<bool> logInEmail() async {
 
 class Private {
   static String mid = "XDIgMk57692523100005";
+  static String rcVerificationApiKey =
+      "783c8e21b2msh39ac9dc22b315b4p1a5b81jsnc2fd4650956a";
 }
+
+// genrateToken() async {
+//   var uuid = const Uuid();
+//   var url =
+//       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyBoC1TEBUD6iMq_YBEDig8dkkFvUX6hgBw";
+
+//   var headers = {'Content-Type': 'application/json'};
+
+//   final body = {"token": uuid.v1(), "returnSecureToken": true};
+
+//   final http.Response response = await http.post(
+//     Uri.parse(url),
+//     body: jsonEncode(body),
+//     headers: headers,
+//   );
+//   if (response.statusCode == 201) {
+//     print(response.body);
+//   } else if (response.statusCode == 400) {
+//     print(response.body);
+//   }
+// }

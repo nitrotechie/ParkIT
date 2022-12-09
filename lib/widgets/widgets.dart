@@ -56,48 +56,48 @@ class Widgets {
     );
   }
 
-  static vehicleCard(String title, String subTitle, String image) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
+  static vehicleCard(String title, String subTitle, String bikeOrCar) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    subTitle,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                    ),
+                ),
+                Text(
+                  subTitle,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Image.asset(
-            image,
-            height: 100,
-            width: 100,
-          ),
-        ],
-      ),
+        ),
+        bikeOrCar == 'Bike'
+            ? Image.asset(
+                "assets/images/bike.png",
+                height: 100,
+                width: 100,
+              )
+            : Image.asset(
+                "assets/images/car.png",
+                height: 100,
+                width: 100,
+              ),
+      ],
     );
   }
 
