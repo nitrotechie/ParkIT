@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:parkit/screens/vehicle_details.dart';
 import 'package:parkit/services/services.dart';
 import 'package:parkit/utils/themes.dart';
 import 'package:parkit/widgets/widgets.dart';
@@ -158,175 +159,188 @@ class _VehicleScreenState extends State<VehicleScreen> {
       ),
       body: Stack(
         children: [
-          SafeArea(
-            child: SingleChildScrollView(
-              child: Container(
-                color: Colors.white,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.indigo.withOpacity(0.1),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "My Vehicle",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "Vehicles you own",
-                                  style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          LottieBuilder.asset(
-                            "assets/animation/car.json",
-                            height: 200,
-                            width: 200,
-                          )
-                        ],
-                      ),
+          SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.indigo.withOpacity(0.1),
                     ),
-                    Stack(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: (() {
-                            showAddVehicle();
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => const AddVehicleScreen()));
-                          }),
-                          child: Container(
-                            color: Colors.indigo.withOpacity(0.1),
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                top: 10,
-                                left: 20,
-                                right: 20,
-                                bottom: 20,
-                              ),
-                              decoration: BoxDecoration(
-                                color: MyTheme.ligthBluishColor,
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "My Vehicle",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              child: Card(
-                                color: Colors.transparent,
-                                elevation: 0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: const [
-                                            Text(
-                                              "Add New Vehicle",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                              Text(
+                                "Vehicles you own",
+                                style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        Positioned(
-                          top: 90,
+                        LottieBuilder.asset(
+                          "assets/animation/car.json",
+                          height: 200,
+                          width: 200,
+                        )
+                      ],
+                    ),
+                  ),
+                  Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: (() {
+                          showAddVehicle();
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (context) => const AddVehicleScreen()));
+                        }),
+                        child: Container(
+                          color: Colors.indigo.withOpacity(0.1),
                           child: Container(
-                            height: 30,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 20,
+                              right: 20,
+                              bottom: 20,
+                            ),
+                            decoration: BoxDecoration(
+                              color: MyTheme.ligthBluishColor,
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 topRight: Radius.circular(20),
                               ),
                             ),
+                            child: Card(
+                              color: Colors.transparent,
+                              elevation: 0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: const [
+                                          Text(
+                                            "Add New Vehicle",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        10,
-                        20,
-                        20,
-                        20,
                       ),
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: firebase
-                            .collection('users')
-                            .doc(user!.phoneNumber
-                                .toString()
-                                .replaceAll('+91', ''))
-                            .collection('vehicles')
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          return snapshot.hasData
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const ScrollPhysics(),
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder: (context, i) {
-                                    QueryDocumentSnapshot x =
-                                        snapshot.data!.docs[i];
-                                    return x['registration_number'] == 'null'
-                                        ? Container(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 200),
-                                            child: LottieBuilder.asset(
-                                                "assets/animation/nodata.json"),
-                                          )
-                                        : Widgets.vehicleCard(
+                      Positioned(
+                        top: 90,
+                        child: Container(
+                          height: 30,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      10,
+                      20,
+                      20,
+                      20,
+                    ),
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: firebase
+                          .collection('users')
+                          .doc(user!.phoneNumber
+                              .toString()
+                              .replaceAll('+91', ''))
+                          .collection('vehicles')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        return snapshot.hasData
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: const ScrollPhysics(),
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, i) {
+                                  QueryDocumentSnapshot x =
+                                      snapshot.data!.docs[i];
+                                  return x['registration_number'] == 'null'
+                                      ? Container(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 200),
+                                          child: LottieBuilder.asset(
+                                              "assets/animation/nodata.json"),
+                                        )
+                                      : GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    VehicleDetailsScreen(
+                                                  rcNo:
+                                                      x['registration_number'],
+                                                  vehicleType: x['vehicle_type'],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Widgets.vehicleCard(
                                             x['manufacturer_model'],
                                             x['manufacturer'],
-                                            x['vehicle_type']);
-                                  },
-                                )
-                              : Container();
-                        },
-                      ),
-                    )
-                  ],
-                ),
+                                            x['vehicle_type'],
+                                          ),
+                                        );
+                                },
+                              )
+                            : Container();
+                      },
+                    ),
+                  )
+                ],
               ),
             ),
           ),

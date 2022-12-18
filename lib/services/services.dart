@@ -118,6 +118,61 @@ Future<bool> addNewVehicle(rcNo) async {
   }
 }
 
+getFuelPrice() async {
+  String date = DateFormat.MMMEd().format(DateTime.now());
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  var url =
+      'https://daily-petrol-diesel-lpg-cng-fuel-prices-in-india.p.rapidapi.com/v1/fuel-prices/today/india/states';
+  var headers = {
+    'X-RapidAPI-Host':
+        'daily-petrol-diesel-lpg-cng-fuel-prices-in-india.p.rapidapi.com',
+    'X-RapidAPI-Key': Private.fuelApiKey,
+    'Content-Type': 'application/json'
+  };
+  final result =
+      await firestore.collection('maintainance').doc('dateMaintain').get();
+  final value = result.data();
+  final dateFromdata = value!['date'];
+
+  if (date != dateFromdata) {
+    final http.Response response = await http.get(
+      Uri.parse(url),
+      headers: headers,
+    );
+    final data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      await uploadFuelData(data);
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+uploadFuelData(data) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String date = DateFormat.MMMEd().format(DateTime.now());
+  List list = data['statePrices'];
+  var len = list.length;
+  for (var i = 0; i < len; i++) {
+    var fdata = {
+      'petrolPrice': data['statePrices'][i]['fuel']['petrol']['retailPrice'],
+      'petrolPriceChange': data['statePrices'][i]['fuel']['petrol']
+          ['retailPriceChange'],
+      'dieselPrice': data['statePrices'][i]['fuel']['diesel']['retailPrice'],
+      'dieselPriceChange': data['statePrices'][i]['fuel']['diesel']
+          ['retailPriceChange'],
+    };
+    await firestore
+        .collection('fuelPrice')
+        .doc(data['statePrices'][i]['stateName'])
+        .set(fdata);
+  }
+  await firestore.collection('maintainance').doc('dateMaintain').set({
+    'date': date,
+  });
+}
+
 Future<bool> bookParkingSpot(
   bookingId,
   bookingDate,

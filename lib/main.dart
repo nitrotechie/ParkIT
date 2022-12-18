@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:parkit/firebase_options.dart';
 import 'package:parkit/screens/add_money.dart';
 import 'package:parkit/screens/splash_screen.dart';
-import 'package:parkit/services/services.dart';
 import 'package:parkit/utils/themes.dart';
 import 'package:provider/provider.dart';
 

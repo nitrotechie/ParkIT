@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart' as lo;
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final firebase = FirebaseFirestore.instance;
   var searching = false;
   var loading = false;
+  var state = '';
   var mkIcon;
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getUserName();
     getImage();
     getCurrentPosition();
+    getFuelPrice();
     getIcon();
   }
 
@@ -64,8 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
           desiredAccuracy: LocationAccuracy.best);
       lati = currentPostion.latitude;
       lon = currentPostion.longitude;
+      await getState();
       setState(() {});
     }
+  }
+
+  getState() async {
+    List<Placemark> pl = await placemarkFromCoordinates(lati, lon);
+    final areaData = pl[0].toJson();
+    print(areaData);
+    state = areaData['subAdministrativeArea']  == '' ? areaData['administrativeArea'] : areaData['subAdministrativeArea'];
+    setState(() {});
+    print(state);
   }
 
   getIcon() async {
@@ -233,8 +246,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
-                              ),
+                                  color: Colors.white.withOpacity(0.5),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  )),
                               child: StreamBuilder<QuerySnapshot>(
                                   stream: firebase
                                       .collection('parking-space')
@@ -433,112 +449,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           );
                                   }),
-                            )
+                            ),
                           ],
                         ),
                       ),
                     ),
+                    Material(
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        height: 300,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(
+                            20,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text(
+                                "Services",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 254,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20), 
+                                  bottomRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  // StreamBuilder<DocumentSnapshot>(
+                                  //   stream: firebase
+                                  //       .collection('fuelPrice')
+                                  //       .doc(state)
+                                  //       .snapshots(),
+                                  //   builder: (context, snapshot) {
+                                  //     return snapshot.hasData
+                                  //         ? Container()
+                                  //         : Container();
+                                  //   },
+                                  // )
+                                   
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
             ),
-      // : Stack(
-      //     children: [
-      //       GoogleMap(
-      //         myLocationButtonEnabled: false,
-      //         initialCameraPosition: CameraPosition(
-      //             target: LatLng(lat, lon), zoom: 15),
-      //         onMapCreated: (controller) {
-      //           setState(() {});
-      //         },
-      //         markers: {
-      //           Marker(
-      //             markerId: const MarkerId("value"),
-      //             position: LatLng(lat, lon),
-      //             onTap: () {},
-      //             // icon: (mkIcon == null)
-      //             //     ? BitmapDescriptor.defaultMarker
-      //             //     : mkIcon,
-      //           )
-      //         },
-      //       ),
-      //       SafeArea(
-      //         child: Row(
-      //           children: [
-      //             Expanded(
-      //               child: Container(
-      //                 margin: const EdgeInsets.only(
-      //                   left: 12,
-      //                   right: 10,
-      //                   top: 10,
-      //                 ),
-      //                 height: 50,
-      //                 decoration: BoxDecoration(
-      //                   color: Colors.white,
-      //                   borderRadius: BorderRadius.circular(10),
-      //                 ),
-      //                 child: TextField(
-      //                   controller: search,
-      //                   textAlign: TextAlign.justify,
-      //                   decoration: InputDecoration(
-      //                     border: InputBorder.none,
-      //                     prefixIcon: Icon(
-      //                       Icons.search,
-      //                       size: 25,
-      //                       color: Theme.of(context).secondaryHeaderColor,
-      //                     ),
-      //                     suffixIcon: searching
-      //                         ? IconButton(
-      //                             icon: Icon(
-      //                               Icons.cancel,
-      //                               size: 25,
-      //                               color: Theme.of(context)
-      //                                   .secondaryHeaderColor,
-      //                             ),
-      //                             onPressed: () {
-      //                               setState(() {
-      //                                 search.text = "";
-      //                               });
-      //                             },
-      //                           )
-      //                         : Container(),
-      //                     hintText: "Search",
-      //                   ),
-      //                   onChanged: (value) {
-      //                     if (value != "") {
-      //                       setState(() {
-      //                         searching = true;
-      //                       });
-      //                     } else {
-      //                       setState(() {
-      //                         searching = false;
-      //                       });
-      //                     }
-      //                   },
-      //                 ),
-      //               ),
-      //             ),
-      //             Container(
-      //               margin: const EdgeInsets.only(
-      //                 right: 12,
-      //                 top: 10,
-      //               ),
-      //               decoration: BoxDecoration(
-      //                 color: Colors.white,
-      //                 borderRadius: BorderRadius.circular(10),
-      //               ),
-      //               child: IconButton(
-      //                 onPressed: () {},
-      //                 icon: const Icon(
-      //                   Icons.tune,
-      //                 ),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   ),
     );
   }
 }

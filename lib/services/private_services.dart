@@ -24,6 +24,7 @@ class Private {
   static String mid = "XDIgMk57692523100005";
   static String rcVerificationApiKey =
       "783c8e21b2msh39ac9dc22b315b4p1a5b81jsnc2fd4650956a";
+  static String fuelApiKey = "783c8e21b2msh39ac9dc22b315b4p1a5b81jsnc2fd4650956a";
 }
 
 // genrateToken() async {
