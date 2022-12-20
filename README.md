@@ -1,16 +1,22 @@
-# parkit
+<Center><h1>ParkIT<h1></Center>
 
-A new Flutter project.
+In this app users can book parking slot based on availability on the parking site via app very smoothly.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="App Screenshots/1.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/2.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/3.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/4.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/5.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/6.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/7.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/8.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/9.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/10.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/11.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/12.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/13.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/14.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/15.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/16.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/17.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="App Screenshots/18.png" height = "500"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
